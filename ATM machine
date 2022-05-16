@@ -1,0 +1,48 @@
+#This project contains multiple modules, this is the first module this module defines the action of depositing money.
+
+# Deposit of the Balance
+def deopsitAmount(crtAmount):
+  depAmount = int(input("Enter the amount you want to deposit -"))
+  
+  newBalance = crtAmount + depAmount 
+  print("Current Balance after depositing- ",newBalance)
+  return newBalance
+  
+#This module contains the defination for withdrawal of money.
+# withdrawal of balance
+
+def withdraw(crtAmount):
+  withdrawAmount = int(input("Enter the amount you want to withdraw -"))
+
+  if withdrawAmount> crtAmount:
+    print("Balance is Low")
+    return crtAmount
+  else:
+    newBalance = crtAmount - withdrawAmount
+    print("Current Balance after withdraw-", newBalance)
+    return newBalance
+    
+#The driver code, which combines modules to do the desired function!
+# The output code
+
+def driveCode(crtAmount):
+  print("Current balance -",crtAmount)
+  print("press 1 for Deposit")
+  print("press 2 for withdraw")
+  choice = int(input("Enter your choice 1/2- "))
+
+  if choice == 1:
+    crtAmount = deopsitAmount(crtAmount)
+  elif choice == 2:
+    crtAmount = withdraw(crtAmount)
+  else:
+    print("Enter the right Choice")
+
+  return crtAmount
+  
+#Directions of usage!
+In order to run the command, you will need to run the following line given below. And instead of *X* given in currentAmount(1st line)
+Enter the amount of rupees you want in your bank account.
+
+currentAmount = X                          #Enter your balance with which you want to start
+currentAmount = driveCode(currentAmount)
