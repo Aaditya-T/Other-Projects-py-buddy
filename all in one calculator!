@@ -1,0 +1,751 @@
+from tkinter import *
+import time
+from math import gcd, lcm, sqrt
+import random
+from tkinter import font
+from typing import List
+
+root = Tk()
+main_w = Frame(root)
+main_w.pack()
+calc = Frame(root)
+pytha = Frame(root)
+hc = Frame(root)
+co = Frame(root)
+co_t = Frame(root)
+co_d = Frame(root)
+el = Frame(root)
+eli = Frame(root)
+elpd = Frame(root)
+elohm= Frame(root)
+light = Frame(root)
+light_m_mag = Frame(root)
+light_m_mf = Frame(root)
+root.resizable(False,False)
+root.title('All in one calculator')
+#------------------------------------------main defs-----------------------------------------#
+def open_calculator():
+    calc.pack(fill='both',expand=1)
+    main_w.pack_forget()
+def home_page():
+    calc.pack_forget()
+    pytha.pack_forget()
+    hc.pack_forget()
+    co.pack_forget()
+    co_t.pack_forget()
+    co_d.pack_forget()
+    el.pack_forget()
+    eli.pack_forget()
+    elpd.pack_forget()
+    elohm.pack_forget()
+    light.pack_forget()
+    light_m_mag.pack_forget()
+    light_m_mf.pack_forget()
+    main_w.pack()
+def open_py():
+    pytha.pack(fill='both',expand=1)
+    main_w.pack_forget()
+def open_hc():
+    hc.pack(fill='both',expand=1)
+    main_w.pack_forget()
+def open_co():
+    co.pack(fill='both',expand=1)
+    main_w.pack_forget()
+def open_co_t():
+    co.pack_forget()
+    co_t.pack(fill='both',expand=1)
+def open_co_d():
+    co.pack_forget()
+    co_d.pack(fill='both',expand=1)
+def open_el():
+    main_w.pack_forget()
+    el.pack(fill='both',expand=1)
+def open_eli():
+    el.pack_forget()
+    eli.pack(fill='both',expand=1)
+def open_elpd():
+    el.pack_forget()
+    elpd.pack(fill='both',expand=1)
+def open_elohm():
+    el.pack_forget()
+    elohm.pack(fill='both',expand=1)
+def open_light():
+    main_w.pack_forget()
+    light.pack(fill='both',expand=1)
+def open_light_mf():
+    light.pack_forget()
+    light_m_mf.pack(fill='both',expand=1)
+def open_light_mag():
+    light.pack_forget()
+    light_m_mag.pack(fill='both',expand=1)
+
+error_lists = ["Error!","Try pressing the right button next time!","Not again!","Wrong button!","Wrong button again","NO",'Try entering some values next time.']
+#--------------------------------------Buttons--------------------------------------------------#
+menu = Label(main_w,text="Choose 1 type of calculator",padx=0,pady=10,font="Ariel")
+menu.grid(row=0,column=0,columnspan=2)
+but = Button(main_w,text="Calculator",command=open_calculator,pady=10,padx=28,border=10,borderwidth=5)
+but.grid(row=1,column=0)
+ho = Button(calc,text="Home Page",command=home_page,pady=10,padx=42,border=10,borderwidth=5)
+ho.grid(row=12,column=0,columnspan=1)
+but2 = Button(main_w,text="Pythagorus calculator",command=open_py,pady=10,padx=10,border=10,borderwidth=5)
+but2.grid(row=1,column=1)
+but3 = Button(main_w,text="HCF/LCM/FACTORS",command=open_hc,borderwidth=5,pady=10)
+but3.grid(row=2,column=0)
+but4 = Button(main_w,text='Co-ordinate Geometry',command=open_co,borderwidth=5,padx=9,pady=10)
+but4.grid(column=1,row=2)
+but5 = Button(main_w,text='Electricity',command=open_el,borderwidth=5,padx=30,pady=10)
+but5.grid(column=0,row=3)
+but6 = Button(main_w,text='CH-10 LIGHT',command=open_light,borderwidth=5,padx=34,pady=10)
+but6.grid(column=1,row=3)
+cl = Button(calc,text="Clear",command= lambda : clearr(),pady=10,padx=50,border=10,borderwidth=5)
+cl.grid(row=12,column=1,columnspan=1)
+#--------------------------------------Normal Calculator-----------------------------------------#
+num_1 = Label(calc,text='Number 1',padx=20,pady=20)
+num_2 = Label(calc,text='Number 2',padx=20,pady=20)
+num_3 = Label(calc,text='No. for root/square',padx=20,pady=20)
+ca = Label(calc,text="Calclator!",padx=0,pady=0,font="Ariel")
+res = Label(calc,text="Result :",pady=10)
+res1 = Label(calc,text="Result :",pady=10)
+res1.grid(row=10,column=0)
+res.grid(row=6,column=0)
+ca.grid(row=0,column=0)
+num_1.grid(row=4,column=0)
+num_2.grid(row=5,column=0)
+num_3.grid(row=9,column=0)
+num_1ee = Entry(calc,border=10,borderwidth=5)
+num_2ee = Entry(calc,border=10,borderwidth=5)
+num_3ee = Entry(calc,border=10,borderwidth=5)
+num_4ee = Entry(calc,border=10,borderwidth=5)
+num_5ee = Entry(calc,border=10,borderwidth=5)
+num_5ee.grid(row=10,column=1)
+num_4ee.grid(row=6,column=1)
+num_3ee.grid(row=9,column=1)
+num_1ee.grid(row=4,column=1)
+num_2ee.grid(row=5,column=1)
+def add():
+    num_4ee.get()
+    first_num = float(num_1ee.get())
+    second_num = float(num_2ee.get())
+    # tot = first_num + second_num
+    num_4ee.delete(0,END)
+    num_4ee.insert(0,first_num+second_num)
+def sub():
+    # num_4e.delete()
+    first_num = float(num_1e.get())
+    second_num = float(num_2e.get())
+    num_4ee.insert(0,first_num - second_num)
+def mul():
+    first_num = float(num_1ee.get())
+    second_num = float(num_2ee.get())
+    num_4ee.delete(0,END)
+    num_4ee.insert(0,first_num*second_num)
+def div():
+    num_4ee.delete(0,END)
+    first_num = float(num_1ee.get())
+    second_num = float(num_2ee.get())
+    try:
+        num_4ee.insert(0,first_num/second_num)
+
+    except Exception as e:
+        num_4ee.insert(0,f"{e}is not possible")
+def rooot():
+    num_5ee.delete(0,END)
+    first_num = float(num_3ee.get())
+    # # second_num = float(num_2e.get())
+    try:
+        num_5ee.insert(0,sqrt(first_num))
+    except Exception as b:
+        num_5ee.insert(0,"not possible")
+def square():
+    num_5ee.delete(0,END)
+    first_num = float(num_3ee.get())
+    # # second_num = float(num_2e.get())
+    num_5ee.insert(0,first_num*first_num)
+def sub():
+    num_4ee.delete(0,END)
+    first_num = float(num_1ee.get())
+    second_num = float(num_2ee.get())
+    num_4ee.insert(0,first_num-second_num)
+    num_4ee.grid(row=6,column=1)
+def clearr():
+    num_1ee.delete(0,END)
+    num_2ee.delete(0,END)
+    num_3ee.delete(0,END)
+    num_4ee.delete(0,END)
+    num_5ee.delete(0,END)
+ad = Button(calc,text="ADD",padx=60,pady=15,border=10,borderwidth=5,command=add)
+ad.grid(row=7,column=0)
+su = Button(calc,text="Subtract",padx=40,pady=15,border=10,borderwidth=5,command=sub)
+su.grid(row=7,column=1)
+mu = Button(calc,text="Multiply",padx=50,pady=15,border=10,borderwidth=5,command=mul)
+mu.grid(row=8,column=0)
+#--------------------------------------Defs-----------------------------------------
+di = Button(calc,text="Divide",padx=45,pady=15,border=10,borderwidth=5,command=div)
+di.grid(row=8,column=1)
+roo = Button(calc,text="Root",padx=60,pady=15,border=10,borderwidth=5,command=rooot)
+roo.grid(row=11,column=0)
+roo = Button(calc,text="Square",padx=46,pady=15,border=10,borderwidth=5,command=square)
+roo.grid(row=11,column=1)
+#-------------------------------Pythagorus theoram----------------------------------#
+num_1 = Label(pytha,text='Height',padx=20,pady=20)
+num_2 = Label(pytha,text='Base',padx=20,pady=20)
+num_3 = Label(pytha,text='Hypotenuse',padx=20,pady=20)
+num_1.grid(row=4,column=0)
+num_2.grid(row=5,column=0)
+num_3.grid(row=6,column=0)
+
+num_1e1 = Entry(pytha,border=10,borderwidth=5)
+num_2e2 = Entry(pytha,border=10,borderwidth=5)
+num_3e3 = Entry(pytha,border=10,borderwidth=5)
+num_1e1.grid(row=4,column=1)
+num_2e2.grid(row=5,column=1)
+num_3e3.grid(row=6,column=1)
+#-----------------------------------defs-----------------------------------------#
+def hypo():
+    try:
+        height = float(num_1e1.get())
+        base = float(num_2e2.get())
+        hypo = sqrt(height**2 + base**2)
+        num_3e3.delete(0,END)
+        num_3e3.insert(0,hypo)
+        er_lst = ["You know values cant be negative right?","How can you show a side which is less than 0!","Really trying to input negative values?","A SIDE CANNOT BE LESS THAN 0!"]
+        if height < 0 or base < 0:
+            num_1e1.delete(0,END)
+            num_2e2.delete(0,END)
+            num_3e3.delete(0,END)
+            num_3e3.insert(0,random.choice(er_lst))
+    except Exception:
+        error_lists = ["Error!","Try pressing the right button next time!","Not again!","Wrong button!","Wrong button again","NO"]
+        num_3e3.delete(0,END)
+        num_3e3.insert(0,random.choice(error_lists))
+def base(): #hyp**2-height**2
+    try:
+        height = float(num_1e1.get())
+        hypo = float(num_3e3.get())
+        base = sqrt(hypo**2 - height**2)
+        num_2e2.delete(0,END)
+        num_2e2.insert(0,base)
+        er_lst = ["You know values cant be negative right?","How can you show a side which is less than 0!","Really trying to input negative values?","A SIDE CANNOT BE LESS THAN 0!"]
+        if height < 0 or hypo < 0:
+            num_1e1.delete(0,END)
+            num_2e2.delete(0,END)
+            num_3e3.delete(0,END)
+            num_2e2.insert(0,random.choice(er_lst))   
+    except Exception:
+        error_lists = ["Error!","Try pressing the right button next time!","Not again!","Wrong button!","Wrong button again","NO"]
+        num_2e2.delete(0,END)
+        num_2e2.insert(0,random.choice(error_lists))
+def height(): #hypo - base
+    try:
+        hypo = float(num_3e3.get())
+        base = float(num_2e2.get())
+        height = sqrt(hypo**2 - base**2)
+        num_1e1.delete(0,END)
+        num_1e1.insert(0,height)
+        er_lst = ["You know values cant be negative right?","How can you show a side which is less than 0!","Really trying to input negative values?","A SIDE CANNOT BE LESS THAN 0!"]
+        if base < 0 or hypo < 0:
+                num_1e1.delete(0,END)
+                num_2e2.delete(0,END)
+                num_3e3.delete(0,END)
+                num_1e1.insert(0,random.choice(er_lst))   
+    except Exception:
+            num_1e1.delete(0,END)
+            num_1e1.insert(0,random.choice(error_lists))
+def clear1():
+    num_1e1.delete(0,END)
+    num_2e2.delete(0,END)
+    num_3e3.delete(0,END)
+#---------------------------------Buttons----------------------------------------#
+ho1 = Button(pytha,text="Home Page",command=home_page,pady=10,padx=120,border=10,borderwidth=5)
+pytha_buth = Button(pytha,text="Height",pady=10,padx=63,borderwidth=5,command=height)
+pytha_butb = Button(pytha,text="Base",pady=10,padx=49.6,borderwidth=5,command=base)
+pytha_buthy = Button(pytha,text="Hypotenuse",pady=10,padx=50,borderwidth=5,command=hypo)
+clear12 = Button(pytha,text="Clear",pady=10,padx=48,borderwidth=5,command=clear1)
+
+ho1.grid(row=12,column=0,columnspan=3)
+pytha_buth.grid(row=7,column=0)
+pytha_butb.grid(row=7,column=1)
+pytha_buthy.grid(row=8,column=0)
+clear12.grid(row=8,column=1)
+#------------------------------HCF/LCM/FACTORS---------------------------------#
+ho3 = Button(hc,text="Home page",command=home_page,pady=10,padx=120,border=10,borderwidth=5)
+ho3.grid(row=10,column=0,columnspan=3)
+
+num_1 = Label(hc,text='Number 1',padx=20,pady=20)
+num_2 = Label(hc,text='Number 2',padx=20,pady=20)
+num_3 = Label(hc,text='Enter the number :',padx=20,pady=20)
+num_1.grid(row=0,column=0)
+num_2.grid(row=1,column=0)
+num_3.grid(row=5,column=0)
+
+num_1e = Entry(hc,border=10,borderwidth=5)
+num_2e = Entry(hc,border=10,borderwidth=5)
+num_3e = Entry(hc,border=10,borderwidth=5)
+hcf_res = Entry(hc,border=10,borderwidth=5)
+lcm_res = Entry(hc,border=10,borderwidth=5)
+num_1e.grid(row=0,column=1)
+num_2e.grid(row=1,column=1)
+num_3e.grid(row=5,column=1)
+hcf_res.grid(row=2,column=1)
+lcm_res.grid(row=3,column=1)
+#-------------------------------defs-----------------------------------------------#
+def hcfre():
+    hcf_res.delete(0,END)
+    num1 = int(num_1e.get())
+    num2 = int(num_2e.get())
+    hcf = gcd(num1,num2)
+    hcf_res.insert(0,hcf)
+def lcmre():
+    lcm_res.delete(0,END)
+    num1 = int(num_1e.get())
+    num2 = int(num_2e.get())
+    x = lcm(num1,num2)
+    lcm_res.insert(0,x)
+def getFactor():
+    #List for storing factors of entered number by the user
+    factors = []
+    lineno = 0
+    # for clearing the listbox if it has any data inside it.
+    listb.delete(0,END)
+    #Defining global before variable to access and store values inside it to access it within program
+    global value
+    # StringVar for updating number
+    global input
+
+    value = int(num_3e.get())
+    input.set("Factors for {} are as follows".format(value))
+    if value > 0:
+
+        for i in range(1,value+1):
+            if value%i==0:
+                factors.append(i)
+        for x in factors:
+            v = factors[lineno]
+            listb.insert(lineno+1, v)
+            lineno = lineno + 1
+        listb.grid(row=6,column=1)
+    else:
+        print("Something is not right!!!")   
+def clear():
+    num_1e.delete(0,END)
+    num_2e.delete(0,END)
+    num_3e.delete(0,END)
+    listb.delete(0,END)
+    hcf_res.delete(0,END)
+    lcm_res.delete(0,END)
+    listb.grid_forget()
+#---------------------------more stuff/buttons/gui---------------------------------#
+Factors = Button(hc,text="Factors",pady=10,padx=55,border=10,borderwidth=5,command=getFactor)
+cler = Button(hc,text="Clear",pady=10,padx=53,border=10,borderwidth=5,command=clear)
+Lcm = Button(hc,text="LCM",pady=10,padx=55,borderwidth=5,command=lcmre)
+Hcf = Button(hc,text="HCF/GCD",pady=10,padx=50,borderwidth=5,command=hcfre)
+Hcf.grid(row=4,column=0)
+Lcm.grid(row=4,column=1)
+Factors.grid(row=7,column=0,columnspan=1)
+cler.grid(row=7,column=1)
+
+hcfr = Label(hc,text="HCF :",padx=20,pady=20)
+lcmr = Label(hc,text="LCM :",padx=20,pady=20)
+fac = Label(hc,text="Factors :",padx=20,pady=20)
+hcfr.grid(row=2,column=0)
+lcmr.grid(row=3,column=0)
+fac.grid(row=6,column=0)
+
+res3 = Label(hc,text="")
+res3.grid(row=6,column=1)
+listb = Listbox(hc)
+input = StringVar()
+global value
+#-------------------------co-ordinate geometry-----------------------#
+he = Label(co,text='Select 1 type of calculator',font='Ariel')
+he.grid(row=0,column=0,columnspan=2)
+tri = Button(co,text='Area of Triangle',pady=10,padx=10,borderwidth=5,command=open_co_t)
+tri.grid(row=1,column=0)
+di = Button(co,text='Distance Formula',pady=10,padx=10,borderwidth=5,command=open_co_d)
+di.grid(row=1,column=1)
+ho4 = Button(co,text='Home Page',command=home_page,padx=85,pady=10,borderwidth=5)
+ho4.grid(row=4,column=0,columnspan=2)
+ho5 = Button(co_t,text='Home Page',command=home_page,padx=30,pady=10,borderwidth=5)
+ho5.grid(row=4,column=3)
+ho6 = Button(co_d,text='Home Page',command=home_page,padx=30,pady=10,borderwidth=5)
+ho6.grid(row=3,column=3)
+#---------------------area of tri in co-ordinate geo-----------------#
+ins = Label(co_t,text='Enter the respective values of respective sides',font='Ariel',padx=20,pady=20)
+ins.grid(row=0,column=0,columnspan=5)
+sx1 = Label(co_t,text='Enter X1',pady=5,padx=5)
+sy1 = Label(co_t,text='Enter Y1',pady=5,padx=5)
+sx2 = Label(co_t,text='Enter X2',pady=5,padx=5)
+sy2 = Label(co_t,text='Enter Y2',pady=5,padx=5)
+sx3 = Label(co_t,text='Enter X3',pady=5,padx=5)
+sy3 = Label(co_t,text='Enter Y3',pady=5,padx=5)
+res4= Label(co_t,text='Result :',padx=10,pady=10)
+res5= Label(co_t,text='',pady=10,padx=10)
+sx1.grid(row=1,column=0)
+sy1.grid(row=1,column=2)
+sx2.grid(row=2,column=0)
+sy2.grid(row=2,column=2)
+sx3.grid(row=3,column=0)
+sy3.grid(row=3,column=2)
+res4.grid(row=4,column=0)
+res5.grid(row=4,column=1)
+
+s1x = Entry(co_t,border=10,borderwidth=5)
+s1y = Entry(co_t,border=10,borderwidth=5)
+s2x = Entry(co_t,border=10,borderwidth=5)
+s2y = Entry(co_t,border=10,borderwidth=5)
+s3x = Entry(co_t,border=10,borderwidth=5)
+s3y = Entry(co_t,border=10,borderwidth=5)
+s1x.grid(row=1,column=1)
+s1y.grid(row=1,column=3)
+s2x.grid(row=2,column=1)
+s2y.grid(row=2,column=3)
+s3x.grid(row=3,column=1)
+s3y.grid(row=3,column=3)
+#-------------------------------distance formula---------------------------#
+ins1 = Label(co_d,text='Enter the respective values of respective sides',font='Ariel',padx=20,pady=20)
+ins1.grid(row=0,column=0,columnspan=5)
+six1=Label(co_d,text='Enter X1')
+six2=Label(co_d,text='Enter X2')
+siy1=Label(co_d,text='Enter Y1')
+siy2=Label(co_d,text='Enter Y2')
+res6= Label(co_d,text='Result :',padx=10,pady=10)
+res7= Label(co_d,text='',pady=10,padx=10)
+six1.grid(row=1,column=0)
+six2.grid(row=1,column=2)
+siy1.grid(row=2,column=0)
+siy2.grid(row=2,column=2)
+res6.grid(row=3,column=0)
+res7.grid(row=3,column=1)
+
+x1e = Entry(co_d,border=10,borderwidth=5)
+x2e = Entry(co_d,border=10,borderwidth=5)
+y1e = Entry(co_d,border=10,borderwidth=5)
+y2e = Entry(co_d,border=10,borderwidth=5)
+
+x1e.grid(row=1,column=1)
+x2e.grid(row=1,column=3)
+y1e.grid(row=2,column=1)
+y2e.grid(row=2,column=3)
+#----------------------------def------------------------#
+def ar_t():
+    try:
+        x1 = float(s1x.get())
+        x2 = float(s2x.get())
+        x3 = float(s3x.get())
+        y1 = float(s1y.get())
+        y2 = float(s2y.get())
+        y3 = float(s3y.get())        
+        Triange_Area = abs((0.5)*(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2)))
+        global res5
+        res5.config(text=Triange_Area)
+        if Triange_Area == 0:
+            res5.config(text ='A traingle cannot be formed\nfrom the given cordinates.')
+
+    except Exception:
+        res5.config(text='Error')
+def ar_d():
+    try:
+        x1 = float(x1e.get())
+        x2 = float(x2e.get())
+        y1 = float(y1e.get())
+        y2 = float(y2e.get())
+        v1 = (x2 - x1)**2
+        v2 = (y2 - y1)**2
+        res7.config(text= sqrt(v1+v2))
+    except Exception as e:
+        print(e)
+        res7.config(text='Error/Invalid')
+cotdi = Button(co_d,text='Calculate',command=ar_d,padx=30,pady=10,borderwidth=5)
+cotdi.grid(row=3,column=2)
+cotar = Button(co_t,text='Calculate',command=ar_t,padx=30,pady=10,borderwidth=5)
+cotar.grid(row=4,column=2)
+#-------------------------electricity-------------------------#
+men = Label(el,text='Select one of the following field',font='Ariel',padx=10,pady=10)
+men.grid(row=0,column=0,columnspan=2)
+cu = Button(el,text='Current(I)',command=open_eli,pady=10,padx=40,border=10,borderwidth=5)
+pd = Button(el,text='Potential Difference(V)',command=open_elpd,pady=10,padx=10,border=10,borderwidth=5)
+ohmlaw = Button(el,text="Ohm's law",command=open_elohm,pady=10,padx=38,border=10,borderwidth=5)
+ho7 = Button(el,text='Home page',command=home_page,pady=10,padx=40,border=10,borderwidth=5)
+cu.grid(row=1,column=0)
+pd.grid(row=1,column=1)
+ohmlaw.grid(row=2,column=0)
+ho7.grid(row=2,column=1)
+#--------------------electricity - Current(I)-------------------#
+ho8 = Button(eli,text='Home page',command=home_page,pady=10,padx=40,border=10,borderwidth=5)
+ho8.grid(row=5,column=1,columnspan=1)
+hed = Label(eli,text='Enter the respective values',font='Ariel',padx=10,pady=10)
+hed.grid(row=0,column=0,columnspan=2)
+enti = Label(eli,text='Enter Current(I)(A)',padx=10,pady=10)
+entq = Label(eli,text='Enter Charge(Q)',padx=10,pady=10)
+entt = Label(eli,text='Enter Time(T)',padx=10,pady=10)
+enti.grid(row=1,column=0)
+entq.grid(row=2,column=0)
+entt.grid(row=3,column=0)
+
+ie = Entry(eli,border=10,borderwidth=5)
+qe = Entry(eli,border=10,borderwidth=5)
+te = Entry(eli,border=10,borderwidth=5)
+ie.grid(row=1,column=1)
+qe.grid(row=2,column=1)
+te.grid(row=3,column=1)
+#------------------------------defs----------------------------#
+def get_I():
+    try:
+        ie.delete(0,END)
+        T = float(te.get())
+        Q = float(qe.get())
+        current_I = Q/T
+        ie.insert(0,f'{current_I} Amp')
+    except Exception:
+        ie.insert(0,random.choice(error_lists))
+def get_q():
+    try:
+        qe.delete(0,END)
+        I = float(ie.get())
+        T = float(te.get())
+        current_Q = I * T
+        qe.insert(0,f'{current_Q} C')
+    except Exception:
+        qe.insert(0,random.choice(error_lists))
+def get_t():
+    try:
+        te.delete(0,END)
+        Q = float(qe.get())
+        I = float(ie.get())
+        current_T = Q * I
+        te.insert(0,f'{current_T} Seconds')
+    except Exception:
+        te.insert(0,random.choice(error_lists))
+def clear_1():
+    ie.delete(0,END)
+    qe.delete(0,END)
+    te.delete(0,END)
+#------------------------------------buttons-----------------------------------#
+cali = Button(eli,text='Calculate I(A)',pady=10,padx=20,border=10,borderwidth=5,command=get_I)
+calq = Button(eli,text='Calculate Q',pady=10,padx=40,border=10,borderwidth=5,command=get_q)
+calt = Button(eli,text='Calculate T(s)',pady=10,padx=20,border=10,borderwidth=5,command=get_t )
+clear_10 = Button(eli,text='Clear',pady=10,padx=40,border=10,borderwidth=5,command=clear_1)
+cali.grid(row=4,column=0)
+calq.grid(row=4,column=1)
+calt.grid(row=5,column=0)
+clear_10.grid(row=6,column=0,columnspan=2)
+#----------------------------potential difference(V)(J)(C)------------------------------#
+hed1 = Label(elpd,text='Enter the respective values',font='Ariel',padx=10,pady=10)
+hed1.grid(row=0,column=0,columnspan=2)
+entv = Label(elpd,text='Enter Potential difference(V)',padx=10,pady=10)
+entj = Label(elpd,text='Enter Work done(J)',padx=10,pady=10)
+entc = Label(elpd,text='Enter Charge(Q is the charge\npresent in the unit (C))',padx=10,pady=10)
+entv.grid(row=1,column=0)
+entj.grid(row=2,column=0)
+entc.grid(row=3,column=0)
+
+ve = Entry(elpd,border=10,borderwidth=5)
+je = Entry(elpd,border=10,borderwidth=5)
+qee = Entry(elpd,border=10,borderwidth=5)
+ve.grid(row=1,column=1)
+je.grid(row=2,column=1)
+qee.grid(row=3,column=1)
+#------------------------------defs----------------------------#
+def get_v():
+    try:
+        ve.delete(0,END)
+        J = float(je.get())
+        C = float(qee.get())
+        ve.insert(0,J/C)
+    except Exception:
+        ve.insert(0,random.choice(error_lists))
+def get_j():
+    try:
+        je.delete(0,END)
+        V = float(ve.get())
+        C = float(qee.get())
+        je.insert(0,V*C)
+    except Exception:
+        je.insert(0,random.choice(error_lists))
+def get_ch():
+    try:
+        qee.delete(0,END)
+        J = float(je.get())
+        V = float(ve.get())
+        qee.insert(0,J/V)
+    except Exception:
+        qee.insert(0,random.choice(error_lists))
+def clear_2():
+    ve.delete(0,END)
+    je.delete(0,END)
+    qee.delete(0,END)
+#----------------------------------------Buttons------------------------------------------------#
+calv = Button(elpd,text='Calculate V',pady=10,padx=49,border=10,borderwidth=5,command=get_v)
+calj = Button(elpd,text='Calculate J',pady=10,padx=40,border=10,borderwidth=5,command=get_j)
+calch = Button(elpd,text='Calculate Charge(C)',pady=10,padx=25,border=10,borderwidth=5,command=get_ch)
+ho8 = Button(elpd,text='Home page',command=home_page,pady=10,padx=37,border=10,borderwidth=5)
+clear_11 = Button(elpd,text='Clear',pady=10,padx=40,border=10,borderwidth=5,command=clear_2)
+clear_11.grid(row=6,column=0,columnspan=2)
+ho8.grid(row=5,column=1,columnspan=1)
+calv.grid(row=4,column=0)
+calj.grid(row=4,column=1)
+calch.grid(row=5,column=0)
+#----------------------------Ohm's Law(V)(I)(R)------------------------------#
+hed1 = Label(elohm,text='Enter the respective values',font='Ariel',padx=10,pady=10)
+hed1.grid(row=0,column=0,columnspan=2)
+entv1 = Label(elohm,text='Enter Potential difference(V)',padx=10,pady=10)
+enti1 = Label(elohm,text='Enter Current(I)',padx=10,pady=10)
+entr = Label(elohm,text='Enter Resistance(R)',padx=10,pady=10)
+entv1.grid(row=1,column=0)
+enti1.grid(row=2,column=0)
+entr.grid(row=3,column=0)
+
+v1e = Entry(elohm,border=10,borderwidth=5)
+i1e = Entry(elohm,border=10,borderwidth=5)
+re = Entry(elohm,border=10,borderwidth=5)
+v1e.grid(row=1,column=1)
+i1e.grid(row=2,column=1)
+re.grid(row=3,column=1)
+#------------------------------------defs---------------------------------#
+def get_vohm():
+    try:
+        v1e.delete(0,END)
+        I = float(i1e.get())
+        R = float(re.get())
+        v1e.insert(0,I*R)
+    except Exception:
+        v1e.insert(0,random.choice(error_lists))
+def get_iohm():
+    try:
+        i1e.delete(0,END)
+        V = float(v1e.get())
+        R = float(re.get())
+        i1e.insert(0,V/R)
+    except Exception:
+        i1e.insert(0,random.choice(error_lists))
+def get_rohm():
+    try:
+        re.delete(0,END)
+        V = float(v1e.get())
+        I = float(i1e.get())
+        re.insert(0,V/I)
+    except:
+        re.insert(0,random.choice(error_lists))
+def clear21():
+    i1e.delete(0,END)
+    v1e.delete(0,END)
+    re.delete(0,END)
+#------------------------------------Buttons---------------------------------#
+calvohm = Button(elohm,text='Calculate V',pady=10,padx=49,border=10,borderwidth=5,command=get_vohm)
+caliohm = Button(elohm,text='Calculate I',pady=10,padx=40,border=10,borderwidth=5,command=get_iohm)
+calrohm = Button(elohm,text='Calculate R',pady=10,padx=48,border=10,borderwidth=5,command=get_rohm)
+ho8 = Button(elohm,text='Home page',command=home_page,pady=10,padx=37,border=10,borderwidth=5)
+clear_11 = Button(elohm,text='Clear',pady=10,padx=40,border=10,borderwidth=5,command=clear21)
+clear_11.grid(row=6,column=0,columnspan=2)
+ho8.grid(row=5,column=1,columnspan=1)                                                         
+calvohm.grid(row=4,column=0)
+caliohm.grid(row=4,column=1)
+calrohm.grid(row=5,column=0)
+#------------------------------Light Mirror formula---------------------------------#
+men21 = Label(light,text='Select one of the following field',font='Ariel',padx=10,pady=10)
+men21.grid(row=0,column=0,columnspan=2)
+mf_b = Button(light,text='Mirror Formula',command=open_light_mf,pady=10,padx=40,border=10,borderwidth=5)
+mag_b = Button(light,text='Magnification Formula',command=open_light_mag,pady=10,padx=10,border=10,borderwidth=5)
+ho8 = Button(light,text='Home page',command=home_page,pady=10,padx=40,border=10,borderwidth=5)
+mf_b.grid(row=1,column=0)
+mag_b.grid(row=1,column=1)
+ho8.grid(row=2,column=0,columnspan=2)
+
+hed2 = Label(light_m_mf,text='Enter the respective values',font='Ariel',padx=10,pady=10)
+hed2.grid(row=0,column=0,columnspan=2)
+entv_light = Label(light_m_mf,text='Enter V',padx=10,pady=10)
+entu_light = Label(light_m_mf,text='Enter U',padx=10,pady=10)
+entf_light = Label(light_m_mf,text='Enter F',padx=10,pady=10)
+
+entv_light.grid(row=1,column=0)
+entu_light.grid(row=2,column=0)
+entf_light.grid(row=3,column=0)
+
+
+v1ee = Entry(light_m_mf,border=10,borderwidth=5)
+i1ee = Entry(light_m_mf,border=10,borderwidth=5)
+ree = Entry(light_m_mf,border=10,borderwidth=5)
+v1ee.grid(row=1,column=1)
+i1ee.grid(row=2,column=1)
+ree.grid(row=3,column=1)
+#------------------------------------defs---------------------------------#
+def clear151():
+    v1ee.delete(0,END)
+    i1ee.delete(0,END)
+    ree.delete(0,END)
+def get_v_light():
+    try:
+        v1ee.delete(0,END)
+        U = float(i1ee.get())
+        F = float(ree.get())
+        V = 1/(1/F - 1/U)
+        if V > 0:
+            v1ee.insert(0,f'{V} (virtual image)')
+        elif V < 0:
+            v1ee.insert(0,f'{V} (real image)')
+        else:
+            v1ee.insert(0,V)
+    except Exception:
+        v1ee.insert(0,random.choice(error_lists))
+def get_u_light():
+    try:
+        i1ee.delete(0,END)
+        f = float(ree.get())
+        v = float(v1ee.get())
+        U = 1/f - 1/v
+        i1ee.insert(0,1/U)
+    except Exception:
+        i1ee.insert(0,random.choice(error_lists))
+def get_f_light():
+    try:
+        ree.delete(0,END)
+        v = float(v1ee.get())
+        u = float(i1ee.get())
+        f = 1/v + 1/u
+        ree.insert(0,1/f)
+    except Exception:
+        ree.insert(0,random.choice(error_lists))        
+#------------------------------------Buttons---------------------------------#
+calv_light = Button(light_m_mf,text='Calculate V',pady=10,padx=47,border=10,borderwidth=5,command=get_v_light)
+calu_light = Button(light_m_mf,text='Calculate U',pady=10,padx=40,border=10,borderwidth=5,command=get_u_light)
+calf_light = Button(light_m_mf,text='Calculate F',pady=10,padx=48,border=10,borderwidth=5,command=get_f_light)
+ho9 = Button(light_m_mf,text='Home page',command=home_page,pady=10,padx=37,border=10,borderwidth=5)
+clear_12 = Button(light_m_mf,text='Clear',pady=10,padx=40,border=10,borderwidth=5,command=clear151)
+calv_light.grid(row=4,column=0)
+calu_light.grid(row=4,column=1)
+calf_light.grid(row=5,column=0)
+ho9.grid(row=5,column=1)
+clear_12.grid(row=6,column=0,columnspan=2)
+#------------------------------Light mag formula---------------------------------#
+hed2121 = Label(light_m_mag,text='Enter the respective values',font='Ariel',padx=10,pady=10)
+hed2121.grid(row=0,column=0,columnspan=2)
+entv_light = Label(light_m_mag,text='Enter V',padx=10,pady=10)
+entu_light = Label(light_m_mag,text='Enter U',padx=10,pady=10)
+entf_light = Label(light_m_mag,text='Magnification',padx=10,pady=10)
+ho81 = Button(light_m_mag,text='Home page',command=home_page,pady=10,padx=37,border=10,borderwidth=5)
+ho81.grid(row=4,column=1)                                                        
+entv_light.grid(row=1,column=0)
+entu_light.grid(row=2,column=0)
+entf_light.grid(row=3,column=0)
+
+ent_v_mag = Entry(light_m_mag,border=10,borderwidth=5)
+ent_u_mag = Entry(light_m_mag,border=10,borderwidth=5)
+mag_r = Entry(light_m_mag,border=10,borderwidth=5)
+ent_v_mag.grid(row=1,column=1)
+ent_u_mag.grid(row=2,column=1)
+mag_r.grid(row=3,column=1)
+#------------------------------------defs---------------------------------#
+def get_mag():
+    try:
+        mag_r.delete(0,END)
+        V = float(ent_v_mag.get())
+        U = float(ent_u_mag.get())
+        mag = -V/U
+        mag_r.insert(0,mag)
+    except Exception:
+        mag_r.insert(0,random.choice(error_lists))        
+#------------------------------------button---------------------------------#
+mag_get_r = Button(light_m_mag,text='Get magnification',pady=10,padx=47,border=10,borderwidth=5,command=get_mag)
+mag_get_r.grid(row=4,column=0)
+
+mainloop()
